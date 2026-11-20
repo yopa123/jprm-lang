@@ -1,9 +1,9 @@
-# Especificación del Lenguaje JPRM v2 (CoreWeb Specification)
+# Especificación del Lenguaje JPRM
 
-> **Versión del Motor:** 2.0.0  
+> **Versión:** 1.0.0-alpha  
 > **Extensión de código fuente:** `.jprm`  
 > **Extensión de bytecode binario:** `.jprmc`  
-> **Paradigma:** Orientado a Objetos con Tipado Cerrado Estricto (Estilo Dart / Flutter), MVC desacoplado (Estilo CodeIgniter 4 / Laravel), Asincronía Nativa (`async`/`await`/`spawn`) y Ejecución Compilada/JIT sobre Rust (Tokio + Axum).
+> **Paradigma:** Orientado a Objetos con Tipado Cerrado Estricto, arquitectura MVC desacoplada, Asincronía Nativa (`async`/`await`/`spawn`) y Ejecución de Alto Rendimiento.
 
 ---
 
