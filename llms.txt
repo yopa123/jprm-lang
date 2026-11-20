@@ -1,0 +1,342 @@
+# JPRM Language (v1.0.0-alpha)
+
+> JPRM is a modern, statically and strictly typed programming language, runtime, and web server built for ultra-high performance, simplicity, and safety. It features clean object-oriented syntax, native ActiveRecord ORM over SQLite, asynchronous background workers, and bytecode compilation.
+
+This file provides comprehensive syntax, type rules, conventions, and examples for AI agents and LLMs generating JPRM code.
+
+---
+
+## 1. Core Language Rules & LLM Guidelines
+
+When generating JPRM code, you MUST adhere to the following rules:
+
+1. **NO PHP prefixes:** Variables DO NOT use the `$` sign (`int edad = 30`, NOT `$edad = 30`).
+2. **NO Arrow operators:** Property and method access ALWAYS uses dot notation (`usuario.nombre`, NOT `$usuario->nombre`).
+3. **Function Keyword:** ALWAYS use `fn` to declare functions or methods (`fn calcular() { ... }`, NOT `function calcular()`).
+4. **Strict Closed Typing:** Variables have fixed, immutable types. You cannot reassign a value of a different type to an existing variable.
+5. **String Interpolation:** Use f-strings (`f"Hola {nombre}, tienes {edad} años"`).
+6. **Self Reference:** Inside classes, use `this.propiedad` or `this.metodo()`.
+7. **HTTP Handlers:** Route handlers are decorated with `@get("/route")` or `@post("/route")`.
+8. **Asynchronous Tasks:** Offload heavy or slow I/O using `spawn { ... }` to avoid blocking the HTTP response.
+
+---
+
+## 2. Primitive Types & Declarations
+
+JPRM supports closed, strong typing:
+
+| Type | Description | Example |
+| :--- | :--- | :--- |
+| `int` | 64-bit integer | `int count = 42` |
+| `float` | 64-bit floating point | `float precio = 19.99` |
+| `string` | UTF-8 text string | `string titulo = "Hola Mundo"` |
+| `bool` | Boolean truth value | `bool activo = true` |
+| `array` | Indexed list / vector | `array numeros = [1, 2, 3]` |
+| `json` | Structured JSON payload | `json data = {"status": "ok"}` |
+| `object` | Key-value dictionary or class instance | `object u = new Object()` |
+
+### Variable Declaration Examples:
+```jprm
+int max_reintentos = 3
+float factor_iva = 0.19
+string nombre_sitio = "Mi Plataforma"
+bool depuracion = false
+array etiquetas = ["rust", "web", "jprm"]
+```
+
+---
+
+## 3. Control Flow
+
+### If / Else Conditions:
+```jprm
+if stock > 10 {
+    log_info("Stock suficiente")
+} else if stock > 0 {
+    log_warn("Stock bajo")
+} else {
+    log_error("Sin existencias")
+}
+```
+
+Logical operators: `and`, `or`, `not` (or `&&`, `||`, `!`).
+
+### For Loop (Iteration):
+```jprm
+array frutas = ["manzana", "platano", "naranja"]
+for f in frutas {
+    echo f
+}
+```
+
+### While Loop:
+```jprm
+int contador = 0
+while contador < 5 {
+    contador = contador + 1
+}
+```
+
+---
+
+## 4. Functions (`fn`)
+
+Functions are declared with `fn`, optional typed parameters, and an optional return type:
+
+```jprm
+fn sumar(int a, int b) : int {
+    return a + b
+}
+
+fn formatearPrecio(float monto, string moneda) : string {
+    return f"{moneda} {monto}"
+}
+```
+
+---
+
+## 5. Classes, OOP & ActiveRecord Models
+
+Classes support strictly typed fields, a `constructor` method, and inheritance.
+
+### Standard Class:
+```jprm
+class Cliente {
+    int id
+    string nombre
+    string email
+
+    fn constructor(int id, string nombre, string email) {
+        this.id = id
+        this.nombre = nombre
+        this.email = email
+    }
+
+    fn obtenerResumen() : string {
+        return f"{this.nombre} <{this.email}>"
+    }
+}
+```
+
+### ActiveRecord Model (SQLite):
+Models extending `Model` map automatically to the SQLite database:
+
+```jprm
+class Articulo extends Model {
+    const TABLE = "articulos"
+    const PRIMARY_KEY = "id"
+
+    int id
+    string titulo
+    float precio
+    int stock
+    bool activo
+}
+```
+
+### ActiveRecord Query Methods:
+```jprm
+# Find by Primary Key
+object item = Articulo.find(1)
+
+# Fluid Queries
+array catalogo = Articulo.where("activo", 1)
+                         .where("stock", ">", 0)
+                         .orderBy("precio", "DESC")
+                         .limit(10)
+                         .offset(0)
+                         .get()
+
+# Single Record
+object primero = Articulo.where("titulo", "Teclado").first()
+
+# Count Records
+int total = Articulo.where("activo", 1).count()
+
+# Create & Save
+object nuevo = new Articulo()
+nuevo.titulo = "Monitor 4K"
+nuevo.precio = 349.99
+nuevo.stock = 5
+nuevo.activo = true
+nuevo.save()
+
+# Delete Record
+item.delete()
+```
+
+---
+
+## 6. Web Controllers & HTTP Handlers
+
+In a JPRM MVC project:
+- Front Controller: `www/index.jprm` routes requests.
+- Controllers: `app/Controllers/*Controller.jprm`.
+- Views: `app/Views/*/*.jprm`.
+
+### Controller Example:
+```jprm
+from app.Models.Articulo import Articulo
+
+class ArticuloController {
+
+    # GET /articulos -> List view
+    @get("/articulos")
+    fn listar() {
+        array lista = Articulo.where("activo", 1).orderBy("id", "DESC").get()
+
+        object data = new Object()
+        data.titulo = "Catálogo de Productos"
+        data.articulos = lista
+
+        return view("articulos/index", data)
+    }
+
+    # POST /api/articulos -> Create API endpoint
+    @post("/api/articulos")
+    fn guardar() {
+        object req = @Request
+
+        if len(req.titulo) == 0 {
+            return json_encode({"error": "El título es obligatorio"})
+        }
+
+        object art = new Articulo()
+        art.titulo = escape_html(trim(req.titulo))
+        art.precio = float(req.precio)
+        art.stock = int(req.stock)
+        art.activo = true
+        art.save()
+
+        # Background task: notify or log without blocking HTTP response
+        spawn {
+            log_info(f"Nuevo artículo registrado: ID #{art.id} - {art.titulo}")
+        }
+
+        return json_encode({
+            "status": "ok",
+            "id": art.id,
+            "mensaje": "Artículo creado con éxito"
+        })
+    }
+}
+```
+
+---
+
+## 7. HTTP Context Objects
+
+JPRM provides built-in global context objects in web requests:
+
+- `@Request`: Object containing parsed JSON or POST/PUT form body attributes (`@Request.campo`).
+- `@Query`: Object containing URL query parameters (`@Query.page`, `@Query.busqueda`).
+- `@Session`: Key-value session store (`@Session.user_id = 42`, `@Session.user_id`).
+
+---
+
+## 8. View Templates & Reactivity
+
+In views (`app/Views/*.jprm`), JPRM mixes HTML with template tags:
+
+```html
+<div class="container">
+    <h1>{{ titulo }}</h1>
+
+    {% if len(articulos) == 0 %}
+        <p>No hay artículos registrados actualmente.</p>
+    {% else %}
+        <ul>
+            {% for item in articulos %}
+                <li>
+                    <strong>{{ item.titulo }}</strong> - ${{ item.precio }}
+                    (Stock: {{ item.stock }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+```
+
+---
+
+## 9. Background Asynchronous Processing (`spawn`)
+
+Use `spawn { ... }` inside any script or handler to run long-running or external tasks asynchronously. The server immediately completes the client's HTTP response while the worker executes in the background:
+
+```jprm
+@post("/pedido/completar")
+fn completarPedido() {
+    object req = @Request
+    int pedido_id = req.id
+
+    # HTTP client receives 200 OK immediately
+    spawn {
+        sleep_ms(500)
+        http_get(f"https://api.pagos.com/verificar?id={pedido_id}")
+        log_info(f"Verificación de webhook enviada para pedido #{pedido_id}")
+    }
+
+    return json_encode({"status": "procesando", "id": pedido_id})
+}
+```
+
+---
+
+## 10. Standard Library Reference
+
+- `view(string ruta_vista, object datos) : string`: Render a template view with variables.
+- `json_encode(any valor) : string`: Convert variable or object to JSON string.
+- `json_decode(string json_str) : any`: Parse JSON string into JPRM array/object.
+- `db_query(string sql, array params) : array`: Execute SELECT query with bound parameters.
+- `db_execute(string sql, array params) : int`: Execute INSERT/UPDATE/DELETE query.
+- `db_insert(string tabla, object datos) : int`: Insert key-value map and return primary key ID.
+- `sleep_ms(int ms)`: Non-blocking asynchronous pause without freezing the server.
+- `http_get(string url) : string`: Asynchronous HTTP GET request returning body string.
+- `redirect(string url)`: Redirect client to new location.
+- `session_destroy()`: Invalidate current user session.
+- `len(any valor) : int`: Length of string, array, or object properties.
+- `trim(string texto) : string`: Remove leading and trailing whitespace.
+- `escape_html(string html) : string`: Sanitize string against XSS injection.
+- `log_info(string msg)`: Record INFO entry in rotational logs.
+- `log_warn(string msg)`: Record WARN entry in rotational logs.
+- `log_error(string msg)`: Record ERROR entry in rotational logs.
+
+---
+
+## 11. Database Migrations
+
+Stored in `database/migrations/<timestamp>_<nombre>.jprm`:
+
+```jprm
+fn up() {
+    db_execute("""
+        CREATE TABLE IF NOT EXISTS tareas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            titulo TEXT NOT NULL,
+            completada INTEGER DEFAULT 0,
+            creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """, [])
+}
+
+fn down() {
+    db_execute("DROP TABLE IF EXISTS tareas", [])
+}
+```
+
+CLI commands: `jprm migrate`, `jprm migrate:rollback`, `jprm migrate:status`.
+
+---
+
+## 12. CLI Commands Quick Reference
+
+- `jprm repl` / `jprm console`: Launch interactive REPL.
+- `jprm run <archivo.jprm>`: Run a script directly.
+- `jprm serve --port 8080 --root ./www`: Start web server with live reload.
+- `jprm build [origen] --out <destino>`: Compile project to bytecode (`.jprmc`).
+- `jprm new <nombre>`: Scaffold clean MVC project.
+- `jprm make:model <Nombre>`: Generate ActiveRecord ORM model.
+- `jprm make:dto <Nombre>`: Generate Data Transfer Object with validation.
+- `jprm make:entity <Nombre>`: Generate pure domain entity.
+- `jprm make:migration <Nombre>`: Create versioned schema migration.
+- `jprm install-extension`: Install editor highlighting for Cursor & VS Code.
