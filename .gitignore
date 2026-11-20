@@ -1,0 +1,27 @@
+# target/
+target/
+target_build/
+
+# Archivos de sistema y logs
+*.log
+storage/logs/
+*.db
+*.sqlite
+*.sqlite3
+
+# Binarios locales
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.user
+
+# SO
+.DS_Store
+Thumbs.db

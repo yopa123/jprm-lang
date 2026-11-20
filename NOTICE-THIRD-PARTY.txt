@@ -1,0 +1,685 @@
+===============================================================================
+JPRM Language Engine v2.0 - Third-Party Software Notices and Licenses
+===============================================================================
+
+This binary distribution includes third-party open-source components.
+All included components use permissive open-source licenses (MIT, Apache 2.0,
+BSD, Unlicense, Public Domain) which allow closed-source and binary redistribution.
+
+-------------------------------------------------------------------------------
+Total Dependencies Audited: 130
+-------------------------------------------------------------------------------
+
+* ahash v0.8.12
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/tkaitchuck/ahash
+  Summary: A non-cryptographic hash function using AES-NI for high performance
+
+* aho-corasick v1.1.5
+  License: Unlicense OR MIT
+  Source:  https://github.com/BurntSushi/aho-corasick
+  Summary: Fast multiple substring searching.
+
+* async-trait v0.1.92
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/async-trait
+  Summary: Type erasure for async trait methods
+
+* atomic-waker v1.1.2
+  License: Apache-2.0 OR MIT
+  Source:  https://github.com/smol-rs/atomic-waker
+  Summary: A synchronization primitive for task wakeup
+
+* axum v0.7.9
+  License: MIT
+  Source:  https://github.com/tokio-rs/axum
+  Summary: Web framework that focuses on ergonomics and modularity
+
+* axum-core v0.4.5
+  License: MIT
+  Source:  https://github.com/tokio-rs/axum
+  Summary: Core types and traits for axum
+
+* base64 v0.22.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/marshallpierce/rust-base64
+  Summary: encodes and decodes base64 as bytes or utf8
+
+* bincode v1.3.3
+  License: MIT
+  Source:  https://github.com/servo/bincode
+  Summary: A binary serialization / deserialization strategy that uses Serde for transforming structs into bytes and vice versa!
+
+* bitflags v2.13.2
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/bitflags/bitflags
+  Summary: A macro to generate structures which behave like bitflags.
+
+* block-buffer v0.10.4
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/RustCrypto/utils
+  Summary: Buffer type for block processing of data
+
+* byteorder v1.5.0
+  License: Unlicense OR MIT
+  Source:  https://github.com/BurntSushi/byteorder
+  Summary: Library for reading/writing numbers in big-endian and little-endian.
+
+* bytes v1.12.2
+  License: MIT
+  Source:  https://github.com/tokio-rs/bytes
+  Summary: Types and traits for working with bytes
+
+* cc v1.11.2
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/cc-rs
+  Summary: A build-time dependency for Cargo build scripts to assist in invoking the native
+C compiler to compile native C code into a static archive to be linked into Rust
+code.
+
+* cfg-if v1.0.5
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/cfg-if
+  Summary: A macro to ergonomically define an item depending on a large number of #[cfg]
+parameters. Structured like an if-else chain, the first matching branch is the
+item that gets emitted.
+
+* cpufeatures v0.2.17
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/RustCrypto/utils
+  Summary: Lightweight runtime CPU feature detection for aarch64, loongarch64, and x86/x86_64 targets, 
+with no_std support and support for mobile targets including Android and iOS
+
+* crossbeam-channel v0.5.17
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/crossbeam-rs/crossbeam
+  Summary: Multi-producer multi-consumer channels for message passing
+
+* crossbeam-utils v0.8.23
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/crossbeam-rs/crossbeam
+  Summary: Utilities for concurrent programming
+
+* crypto-common v0.1.7
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/RustCrypto/traits
+  Summary: Common cryptographic traits
+
+* dashmap v6.2.1
+  License: MIT
+  Source:  https://github.com/xacrimon/dashmap
+  Summary: Blazing fast concurrent HashMap for Rust.
+
+* data-encoding v2.11.1
+  License: MIT
+  Source:  https://github.com/ia0/data-encoding
+  Summary: Efficient and customizable data-encoding functions like base64, base32, and hex
+
+* deranged v0.5.9
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/jhpratt/deranged
+  Summary: Ranged integers
+
+* digest v0.10.7
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/RustCrypto/traits
+  Summary: Traits for cryptographic hash functions and message authentication codes
+
+* equivalent v1.0.3
+  License: Apache-2.0 OR MIT
+  Source:  https://github.com/indexmap-rs/equivalent
+  Summary: Traits for key comparison in maps.
+
+* errno v0.3.15
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/lambda-fairy/rust-errno
+  Summary: Cross-platform interface to the `errno` variable.
+
+* fallible-iterator v0.3.0
+  License: MIT/Apache-2.0
+  Source:  https://github.com/sfackler/rust-fallible-iterator
+  Summary: Fallible iterator traits
+
+* fallible-streaming-iterator v0.1.9
+  License: MIT/Apache-2.0
+  Source:  https://github.com/sfackler/fallible-streaming-iterator
+  Summary: Fallible streaming iteration
+
+* find-msvc-tools v0.1.15
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/cc-rs
+  Summary: Find windows-specific tools, read MSVC versions from the registry and from COM interfaces
+
+* form_urlencoded v1.2.2
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/servo/rust-url
+  Summary: Parser and serializer for the application/x-www-form-urlencoded syntax, as used by HTML forms.
+
+* futures-core v0.3.34
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/futures-rs
+  Summary: The core traits and types in for the `futures` library.
+
+* futures-macro v0.3.34
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/futures-rs
+  Summary: The futures-rs procedural macro implementations.
+
+* futures-sink v0.3.34
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/futures-rs
+  Summary: The asynchronous `Sink` trait for the futures-rs library.
+
+* futures-task v0.3.34
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/futures-rs
+  Summary: Tools for working with tasks.
+
+* futures-util v0.3.34
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/futures-rs
+  Summary: Common utilities and extension traits for the futures-rs library.
+
+* generic-array v0.14.7
+  License: MIT
+  Source:  https://github.com/fizyk20/generic-array.git
+  Summary: Generic types implementing functionality of arrays
+
+* getrandom v0.2.17
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-random/getrandom
+  Summary: A small cross-platform library for retrieving random data from system source
+
+* hashbrown v0.14.5
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/hashbrown
+  Summary: A Rust port of Google's SwissTable hash map
+
+* hashbrown v0.17.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/hashbrown
+  Summary: A Rust port of Google's SwissTable hash map
+
+* hashlink v0.9.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/kyren/hashlink
+  Summary: HashMap-like containers that hold their key-value pairs in a user controllable order
+
+* http v1.5.0
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/hyperium/http
+  Summary: A set of types for representing HTTP requests and responses.
+
+* http-body v1.1.0
+  License: MIT
+  Source:  https://github.com/hyperium/http-body
+  Summary: Trait representing an asynchronous, streaming, HTTP request or response body.
+
+* http-body-util v0.1.5
+  License: MIT
+  Source:  https://github.com/hyperium/http-body
+  Summary: Combinators and adapters for HTTP request or response bodies.
+
+* httparse v1.10.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/seanmonstar/httparse
+  Summary: A tiny, safe, speedy, zero-copy HTTP/1.x parser.
+
+* httpdate v1.0.3
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/pyfisch/httpdate
+  Summary: HTTP date parsing and formatting
+
+* hyper v1.12.0
+  License: MIT
+  Source:  https://github.com/hyperium/hyper
+  Summary: A protective and efficient HTTP library for all.
+
+* hyper-util v0.1.21
+  License: MIT
+  Source:  https://github.com/hyperium/hyper-util
+  Summary: hyper utilities
+
+* indexmap v2.14.2
+  License: Apache-2.0 OR MIT
+  Source:  https://github.com/indexmap-rs/indexmap
+  Summary: A hash table with consistent order and fast iteration.
+
+* itoa v1.0.19
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/itoa
+  Summary: Fast integer primitive to string conversion
+
+* lazy_static v1.5.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang-nursery/lazy-static.rs
+  Summary: A macro for declaring lazily evaluated statics in Rust.
+
+* libc v0.2.191
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/libc
+  Summary: Raw FFI bindings to platform libraries like libc.
+
+* libsqlite3-sys v0.30.1
+  License: MIT
+  Source:  https://github.com/rusqlite/rusqlite
+  Summary: Native bindings to the libsqlite3 library
+
+* lock_api v0.4.14
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/Amanieu/parking_lot
+  Summary: Wrappers to create fully-featured Mutex and RwLock types. Compatible with no_std.
+
+* log v0.4.35
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/log
+  Summary: A lightweight logging facade for Rust
+
+* matchers v0.2.0
+  License: MIT
+  Source:  https://github.com/hawkw/matchers
+  Summary: Regex matching on character and byte streams.
+
+* matchit v0.7.3
+  License: MIT AND BSD-3-Clause
+  Source:  https://github.com/ibraheemdev/matchit
+  Summary: A high performance, zero-copy URL router.
+
+* memchr v2.8.3
+  License: Unlicense OR MIT
+  Source:  https://github.com/BurntSushi/memchr
+  Summary: Provides extremely fast (uses SIMD on x86_64, aarch64 and wasm32) routines for
+1, 2 or 3 byte search and single substring search.
+
+* mime v0.3.18
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/hyperium/mime
+  Summary: Strongly Typed Mimes
+
+* mio v1.2.5
+  License: MIT
+  Source:  https://github.com/tokio-rs/mio
+  Summary: Lightweight non-blocking I/O.
+
+* nu-ansi-term v0.50.3
+  License: MIT
+  Source:  https://github.com/nushell/nu-ansi-term
+  Summary: Library for ANSI terminal colors and styles (bold, underline)
+
+* num-conv v0.2.2
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/jhpratt/num-conv
+  Summary: `num_conv` is a crate to convert between integer types without using `as` casts. This provides
+better certainty when refactoring, makes the exact behavior of code more explicit, and allows using
+turbofish syntax.
+
+* once_cell v1.21.4
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/matklad/once_cell
+  Summary: Single assignment cells and lazy values.
+
+* parking_lot v0.12.5
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/Amanieu/parking_lot
+  Summary: More compact and efficient implementations of the standard synchronization primitives.
+
+* parking_lot_core v0.9.12
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/Amanieu/parking_lot
+  Summary: An advanced API for creating custom synchronization primitives.
+
+* percent-encoding v2.3.2
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/servo/rust-url/
+  Summary: Percent encoding and decoding
+
+* pin-project-lite v0.2.17
+  License: Apache-2.0 OR MIT
+  Source:  https://github.com/taiki-e/pin-project-lite
+  Summary: A lightweight version of pin-project written with declarative macros.
+
+* pkg-config v0.3.34
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/pkg-config-rs
+  Summary: A library to run the pkg-config system tool at build time in order to be used in
+Cargo build scripts.
+
+* powerfmt v0.2.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/jhpratt/powerfmt
+  Summary: `powerfmt` is a library that provides utilities for formatting values. This crate makes it
+    significantly easier to support filling to a minimum width with alignment, avoid heap
+    allocation, and avoid repetitive calculations.
+
+* ppv-lite86 v0.2.21
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/cryptocorrosion/cryptocorrosion
+  Summary: Cross-platform cryptography-oriented low-level SIMD library.
+
+* proc-macro2 v1.0.107
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/proc-macro2
+  Summary: A substitute implementation of the compiler's `proc_macro` API to decouple token-based libraries from the procedural macro use case.
+
+* quote v1.0.47
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/quote
+  Summary: Quasi-quoting macro quote!(...)
+
+* rand v0.8.8
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-random/rand
+  Summary: Random number generators and other randomness functionality.
+
+* rand_chacha v0.3.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-random/rand
+  Summary: ChaCha random number generator
+
+* rand_core v0.6.4
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-random/rand
+  Summary: Core random number generator traits and tools for implementation.
+
+* redox_syscall v0.5.18
+  License: MIT
+  Source:  https://gitlab.redox-os.org/redox-os/syscall
+  Summary: A Rust library to access raw Redox system calls
+
+* regex-automata v0.4.18
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/regex
+  Summary: Automata construction and matching using regular expressions.
+
+* regex-syntax v0.8.11
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/regex
+  Summary: A regular expression parser.
+
+* rusqlite v0.32.1
+  License: MIT
+  Source:  https://github.com/rusqlite/rusqlite
+  Summary: Ergonomic wrapper for SQLite
+
+* rustversion v1.0.23
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/rustversion
+  Summary: Conditional compilation according to rustc compiler version
+
+* ryu v1.0.23
+  License: Apache-2.0 OR BSL-1.0
+  Source:  https://github.com/dtolnay/ryu
+  Summary: Fast floating point to string conversion
+
+* scopeguard v1.2.0
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/bluss/scopeguard
+  Summary: A RAII scope guard that will run a given closure when it goes out of scope,
+even if the code between panics (assuming unwinding panic).
+
+Defines the macros `defer!`, `defer_on_unwind!`, `defer_on_success!` as
+shorthands for guards with one of the implemented strategies.
+
+* serde v1.0.229
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/serde-rs/serde
+  Summary: A generic serialization/deserialization framework
+
+* serde_core v1.0.229
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/serde-rs/serde
+  Summary: Serde traits only, with no support for derive -- use the `serde` crate instead
+
+* serde_derive v1.0.229
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/serde-rs/serde
+  Summary: Macros 1.1 implementation of #[derive(Serialize, Deserialize)]
+
+* serde_json v1.0.154
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/serde-rs/json
+  Summary: A JSON serialization file format
+
+* serde_path_to_error v0.1.20
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/path-to-error
+  Summary: Path to the element that failed to deserialize
+
+* serde_urlencoded v0.7.1
+  License: MIT/Apache-2.0
+  Source:  https://github.com/nox/serde_urlencoded
+  Summary: `x-www-form-urlencoded` meets Serde
+
+* sha1 v0.10.7
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/RustCrypto/hashes
+  Summary: SHA-1 hash function
+
+* sharded-slab v0.1.7
+  License: MIT
+  Source:  https://github.com/hawkw/sharded-slab
+  Summary: A lock-free concurrent slab.
+
+* shlex v2.0.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/comex/rust-shlex
+  Summary: Split a string into shell words, like Python's shlex.
+
+* signal-hook-registry v1.4.8
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/vorner/signal-hook
+  Summary: Backend crate for signal-hook
+
+* slab v0.4.12
+  License: MIT
+  Source:  https://github.com/tokio-rs/slab
+  Summary: Pre-allocated storage for a uniform data type
+
+* smallvec v1.16.5
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/servo/rust-smallvec
+  Summary: 'Small vector' optimization: store up to a small number of items on the stack
+
+* socket2 v0.6.5
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/rust-lang/socket2
+  Summary: Utilities for handling networking sockets with a maximal amount of configuration
+possible intended.
+
+* symlink v0.1.0
+  License: MIT/Apache-2.0
+  Source:  https://gitlab.com/chris-morgan/symlink
+  Summary: Create symlinks in a cross-platform manner
+
+* syn v2.0.119
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/syn
+  Summary: Parser for Rust source code
+
+* syn v3.0.10
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/syn
+  Summary: Parser for Rust source code
+
+* sync_wrapper v1.0.2
+  License: Apache-2.0
+  Source:  https://github.com/Actyx/sync_wrapper
+  Summary: A tool for enlisting the compiler's help in proving the absence of concurrency
+
+* thiserror v1.0.69
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/thiserror
+  Summary: derive(Error)
+
+* thiserror v2.0.21
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/thiserror
+  Summary: derive(Error)
+
+* thiserror-impl v1.0.69
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/thiserror
+  Summary: Implementation detail of the `thiserror` crate
+
+* thiserror-impl v2.0.21
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/dtolnay/thiserror
+  Summary: Implementation detail of the `thiserror` crate
+
+* thread_local v1.1.10
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/Amanieu/thread_local-rs
+  Summary: Per-object thread-local storage
+
+* time v0.3.55
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/time-rs/time
+  Summary: Date and time library. Fully interoperable with the standard library. Mostly compatible with #![no_std].
+
+* time-core v0.1.9
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/time-rs/time
+  Summary: This crate is an implementation detail and should not be relied upon directly.
+
+* time-macros v0.2.32
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/time-rs/time
+  Summary: Procedural macros for the time crate.
+    This crate is an implementation detail and should not be relied upon directly.
+
+* tokio v1.54.1
+  License: MIT
+  Source:  https://github.com/tokio-rs/tokio
+  Summary: An event-driven, non-blocking I/O platform for writing asynchronous I/O
+backed applications.
+
+* tokio-macros v2.7.2
+  License: MIT
+  Source:  https://github.com/tokio-rs/tokio
+  Summary: Tokio's proc macros.
+
+* tokio-tungstenite v0.24.0
+  License: MIT
+  Source:  https://github.com/snapview/tokio-tungstenite
+  Summary: Tokio binding for Tungstenite, the Lightweight stream-based WebSocket implementation
+
+* tower v0.5.3
+  License: MIT
+  Source:  https://github.com/tower-rs/tower
+  Summary: Tower is a library of modular and reusable components for building robust
+clients and servers.
+
+* tower-http v0.5.2
+  License: MIT
+  Source:  https://github.com/tower-rs/tower-http
+  Summary: Tower middleware and utilities for HTTP clients and servers
+
+* tower-layer v0.3.3
+  License: MIT
+  Source:  https://github.com/tower-rs/tower
+  Summary: Decorates a `Service` to allow easy composition between `Service`s.
+
+* tower-service v0.3.3
+  License: MIT
+  Source:  https://github.com/tower-rs/tower
+  Summary: Trait representing an asynchronous, request / response based, client or server.
+
+* tracing v0.1.44
+  License: MIT
+  Source:  https://github.com/tokio-rs/tracing
+  Summary: Application-level tracing for Rust.
+
+* tracing-appender v0.2.5
+  License: MIT
+  Source:  https://github.com/tokio-rs/tracing
+  Summary: Provides utilities for file appenders and making non-blocking writers.
+
+* tracing-attributes v0.1.31
+  License: MIT
+  Source:  https://github.com/tokio-rs/tracing
+  Summary: Procedural macro attributes for automatically instrumenting functions.
+
+* tracing-core v0.1.36
+  License: MIT
+  Source:  https://github.com/tokio-rs/tracing
+  Summary: Core primitives for application-level tracing.
+
+* tracing-log v0.2.0
+  License: MIT
+  Source:  https://github.com/tokio-rs/tracing
+  Summary: Provides compatibility between `tracing` and the `log` crate.
+
+* tracing-subscriber v0.3.23
+  License: MIT
+  Source:  https://github.com/tokio-rs/tracing
+  Summary: Utilities for implementing and composing `tracing` subscribers.
+
+* tungstenite v0.24.0
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/snapview/tungstenite-rs
+  Summary: Lightweight stream-based WebSocket implementation
+
+* typenum v1.20.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/paholg/typenum
+  Summary: Typenum is a Rust library for type-level numbers evaluated at
+    compile time. It currently supports bits, unsigned integers, and signed
+    integers. It also provides a type-level array of type-level numbers, but its
+    implementation is incomplete.
+
+* unicode-ident v1.0.27
+  License: (MIT OR Apache-2.0) AND Unicode-3.0
+  Source:  https://github.com/dtolnay/unicode-ident
+  Summary: Determine whether characters have the XID_Start or XID_Continue properties according to Unicode Standard Annex #31
+
+* utf-8 v0.7.6
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/SimonSapin/rust-utf8
+  Summary: Incremental, zero-copy UTF-8 decoding with error handling
+
+* valuable v0.1.1
+  License: MIT
+  Source:  https://github.com/tokio-rs/valuable
+  Summary: Object-safe value inspection, used to pass un-typed structured data across trait-object boundaries.
+
+* vcpkg v0.2.15
+  License: MIT/Apache-2.0
+  Source:  https://github.com/mcgoo/vcpkg-rs
+  Summary: A library to find native dependencies in a vcpkg tree at build
+time in order to be used in Cargo build scripts.
+
+* version_check v0.9.5
+  License: MIT/Apache-2.0
+  Source:  https://github.com/SergioBenitez/version_check
+  Summary: Tiny crate to check the version of the installed/running rustc.
+
+* wasi v0.11.1+wasi-snapshot-preview1
+  License: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+  Source:  https://github.com/bytecodealliance/wasi
+  Summary: Experimental WASI API bindings for Rust
+
+* windows-link v0.2.1
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/microsoft/windows-rs
+  Summary: Linking for Windows
+
+* windows-sys v0.61.2
+  License: MIT OR Apache-2.0
+  Source:  https://github.com/microsoft/windows-rs
+  Summary: Rust for Windows
+
+* zerocopy v0.8.63
+  License: BSD-2-Clause OR Apache-2.0 OR MIT
+  Source:  https://github.com/google/zerocopy
+  Summary: Zerocopy makes zero-cost memory manipulation effortless. We write "unsafe" so you don't have to.
+
+* zerocopy-derive v0.8.63
+  License: BSD-2-Clause OR Apache-2.0 OR MIT
+  Source:  https://github.com/google/zerocopy
+  Summary: Custom derive for traits from the zerocopy crate
+
+* zmij v1.0.23
+  License: MIT
+  Source:  https://github.com/dtolnay/zmij
+  Summary: A double-to-string conversion algorithm based on Schubfach and xjb
+
