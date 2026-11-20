@@ -1,6 +1,7 @@
 # target/
 target/
 target_build/
+target_linux/
 
 # Archivos de sistema y logs
 *.log
