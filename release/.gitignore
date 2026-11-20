@@ -1,0 +1,4 @@
+# Ignorar todos los binarios compilados de distribución (Windows .exe, Linux ELF, .tar.gz, .zip)
+*
+!.gitignore
+!INSTRUCCIONES.md
