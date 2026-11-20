@@ -33,6 +33,60 @@ JPRM v2 adopta una gramática moderna y pura:
 
 ---
 
+## 1.3. Literales de Objeto y Manipulación JSON
+
+JPRM ofrece soporte de primera clase para estructuras de datos de clave-valor (Objetos y JSON):
+
+### Creación y Acceso
+```jprm
+let usuario = {
+    nombre: "Roberto",
+    "apellido": "Gómez",
+    edad: 42,
+    contacto: {
+        email: "roberto@ejemplo.cl"
+    }
+};
+
+# Acceso por punto o por corchetes (incluso anidado)
+echo usuario.nombre;               # Roberto
+echo usuario["apellido"];          # Gómez
+echo usuario.contacto.email;       # roberto@ejemplo.cl
+```
+
+### Mutación de Propiedades (Directa y Profunda)
+```jprm
+usuario.nombre = "Don Ramón";
+usuario["edad"] = 50;
+usuario.contacto.email = "ramon@vecindad.cl";
+```
+
+### Métodos Nativos de Objetos
+Todo objeto en JPRM expone métodos de inspección y conversión:
+- `obj.len()`: Cantidad de propiedades.
+- `obj.keys()`: Arreglo de nombres de claves.
+- `obj.values()`: Arreglo de valores.
+- `obj.has("clave")`: Comprueba si la clave existe (retorna `bool`).
+- `obj.get("clave", default)`: Retorna el valor o el valor por defecto si no existe.
+- `obj.toJson()`: Serializa el objeto a cadena JSON.
+
+### API Global y Estática JSON
+```jprm
+# Serialización (JavaScript style, Estática o Procedural)
+let json_str = JSON.stringify(usuario);
+let json_str2 = JSON::stringify({ test: 123 });
+let json_str3 = json_encode(usuario);
+
+# Deserialización / Parseo
+let objeto = JSON.parse(json_str);
+let objeto2 = JSON::parse(json_str2);
+let objeto3 = json_decode(json_str3);
+
+echo objeto.nombre; # Don Ramón
+```
+
+---
+
 ## 2. Clases, Objetos y ORM con ActiveRecord
 
 JPRM v2 soporta definición de clases nativas con constructores, propiedades tipadas y métodos:
