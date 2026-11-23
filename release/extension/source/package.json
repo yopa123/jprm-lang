@@ -1,0 +1,122 @@
+{
+  "name": "jprm-language",
+  "displayName": "JPRM Language, Theme & Visual Debugger",
+  "description": "Sintaxis, tema de color oficial, autocompletado, snippets y depurador visual interactivo (F5, breakpoints, variables) para archivos .jprm",
+  "version": "1.1.0",
+  "publisher": "jprm",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:jprm",
+    "onDebug"
+  ],
+  "categories": [
+    "Programming Languages",
+    "Themes",
+    "Debuggers",
+    "Snippets"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "jprm",
+        "aliases": [
+          "JPRM",
+          "jprm"
+        ],
+        "extensions": [
+          ".jprm"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "jprm",
+        "scopeName": "text.html.jprm",
+        "path": "./syntaxes/jprm.tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html": "html",
+          "source.jprm": "jprm"
+        }
+      }
+    ],
+    "themes": [
+      {
+        "label": "JPRM Modern Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/jprm-dark-theme.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "jprm",
+        "path": "./snippets/jprm.json"
+      }
+    ],
+    "breakpoints": [
+      {
+        "language": "jprm"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "jprm",
+        "label": "JPRM Debugger",
+        "languages": [
+          "jprm"
+        ],
+        "configurationAttributes": {
+          "launch": {
+            "required": [
+              "program"
+            ],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Ruta al archivo .jprm a depurar",
+                "default": "${file}"
+              },
+              "stopOnEntry": {
+                "type": "boolean",
+                "description": "Detenerse en la primera línea del script",
+                "default": false
+              }
+            }
+          }
+        },
+        "initialConfigurations": [
+          {
+            "type": "jprm",
+            "name": "JPRM: Depurar archivo actual",
+            "request": "launch",
+            "program": "${file}",
+            "stopOnEntry": false
+          }
+        ],
+        "configurationSnippets": [
+          {
+            "label": "JPRM: Depurar archivo actual",
+            "description": "Lanza el depurador gráfico de JPRM para el script activo",
+            "body": {
+              "type": "jprm",
+              "request": "launch",
+              "name": "JPRM: Depurar archivo actual",
+              "program": "^\"\\${file}\"",
+              "stopOnEntry": false
+            }
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "jprm.debugCurrentFile",
+        "title": "JPRM: Iniciar Depuración Visual del Archivo Actual",
+        "category": "JPRM"
+      }
+    ]
+  }
+}

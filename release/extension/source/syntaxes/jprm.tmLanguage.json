@@ -1,0 +1,285 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "JPRM",
+  "scopeName": "text.html.jprm",
+  "patterns": [
+    {
+      "include": "#jprm-short-echo"
+    },
+    {
+      "include": "#jprm-echo"
+    },
+    {
+      "include": "#jprm-code-block"
+    },
+    {
+      "include": "#code-elements"
+    },
+    {
+      "include": "text.html.basic"
+    }
+  ],
+  "repository": {
+    "jprm-short-echo": {
+      "begin": "<\\?=",
+      "beginCaptures": {
+        "0": { "name": "keyword.control.tag.jprm" }
+      },
+      "end": "\\?>",
+      "endCaptures": {
+        "0": { "name": "keyword.control.tag.jprm" }
+      },
+      "name": "source.jprm.embedded.line",
+      "patterns": [
+        { "include": "#code-elements" }
+      ]
+    },
+    "jprm-echo": {
+      "begin": "\\{\\{",
+      "beginCaptures": {
+        "0": { "name": "keyword.control.tag.jprm" }
+      },
+      "end": "\\}\\}",
+      "endCaptures": {
+        "0": { "name": "keyword.control.tag.jprm" }
+      },
+      "name": "source.jprm.embedded.echo",
+      "patterns": [
+        { "include": "#code-elements" }
+      ]
+    },
+    "jprm-code-block": {
+      "begin": "<\\?(?:jprm|php|ws)?",
+      "beginCaptures": {
+        "0": { "name": "keyword.control.tag.jprm" }
+      },
+      "end": "\\?>|\\z",
+      "endCaptures": {
+        "0": { "name": "keyword.control.tag.jprm" }
+      },
+      "name": "source.jprm.embedded.block",
+      "patterns": [
+        { "include": "#code-elements" }
+      ]
+    },
+    "code-elements": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.jprm",
+          "match": "#.*$"
+        },
+        {
+          "name": "comment.line.double-slash.jprm",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.jprm",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "string.quoted.double.interpolated.jprm",
+          "begin": "\\b([fF])(\")",
+          "beginCaptures": {
+            "1": { "name": "storage.type.function.jprm" },
+            "2": { "name": "string.quoted.double.jprm" }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": { "name": "string.quoted.double.jprm" }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.escape.jprm",
+              "match": "\\\\."
+            },
+            {
+              "name": "meta.interpolation.jprm",
+              "begin": "\\{",
+              "beginCaptures": {
+                "0": { "name": "keyword.control.interpolation.jprm" }
+              },
+              "end": "\\}",
+              "endCaptures": {
+                "0": { "name": "keyword.control.interpolation.jprm" }
+              },
+              "patterns": [
+                { "include": "#code-elements" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.interpolated.jprm",
+          "begin": "\\b([fF])(')",
+          "beginCaptures": {
+            "1": { "name": "storage.type.function.jprm" },
+            "2": { "name": "string.quoted.single.jprm" }
+          },
+          "end": "'",
+          "endCaptures": {
+            "0": { "name": "string.quoted.single.jprm" }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.escape.jprm",
+              "match": "\\\\."
+            },
+            {
+              "name": "meta.interpolation.jprm",
+              "begin": "\\{",
+              "beginCaptures": {
+                "0": { "name": "keyword.control.interpolation.jprm" }
+              },
+              "end": "\\}",
+              "endCaptures": {
+                "0": { "name": "keyword.control.interpolation.jprm" }
+              },
+              "patterns": [
+                { "include": "#code-elements" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.triple.double.jprm",
+          "begin": "\"\"\"",
+          "end": "\"\"\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.jprm",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.jprm",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.jprm",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.jprm",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.jprm",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "entity.name.function.decorator.jprm",
+          "match": "@[a-zA-Z_][a-zA-Z0-9_]*(\\.[a-zA-Z_][a-zA-Z0-9_]*)*"
+        },
+        {
+          "name": "meta.annotation.bracketed.jprm",
+          "begin": "@\\[",
+          "beginCaptures": {
+            "0": { "name": "entity.name.function.decorator.jprm" }
+          },
+          "end": "\\]",
+          "endCaptures": {
+            "0": { "name": "entity.name.function.decorator.jprm" }
+          },
+          "patterns": [
+            {
+              "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(:)",
+              "captures": {
+                "1": { "name": "variable.parameter.jprm" },
+                "2": { "name": "keyword.operator.assignment.jprm" }
+              }
+            },
+            { "include": "#code-elements" }
+          ]
+        },
+        {
+          "name": "keyword.control.debugger.jprm",
+          "match": "\\b(debugger|breakpoint)\\b"
+        },
+        {
+          "name": "keyword.control.jprm",
+          "match": "\\b(let|mut|const|enum|from|import|require|require_once|include|use|if|else|elif|elseif|endif|for|foreach|in|as|endfor|endforeach|while|endwhile|return|break|continue|new|spawn|await|async|endfunction|endfn)\\b"
+        },
+        {
+          "name": "keyword.operator.logical.jprm",
+          "match": "\\b(and|or|not|AND|OR)\\b|&&|\\|\\||!"
+        },
+        {
+          "name": "constant.language.boolean.jprm",
+          "match": "\\b(true|false|True|False|null|None|nil|NULL)\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.jprm",
+          "match": "\\b\\d+(\\.\\d+)?[mMnN]\\b"
+        },
+        {
+          "name": "constant.numeric.jprm",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
+        },
+        {
+          "match": "\\b(function|fn|def)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.function.jprm" },
+            "2": { "name": "entity.name.function.declaration.jprm" }
+          }
+        },
+        {
+          "name": "storage.type.function.jprm",
+          "match": "\\b(function|fn|def|class|interface|trait)\\b"
+        },
+        {
+          "name": "storage.type.primitive.jprm",
+          "match": "\\b(int|Int|integer|float|Float|double|Double|decimal|Decimal|string|String|bool|Bool|boolean|array|Array|list|List|object|Object|json|Json|JSON|var|dynamic|void|DataFrame|App|JprmBBDD|BBDDClient)\\b"
+        },
+        {
+          "name": "support.function.builtin.jprm",
+          "match": "\\b(view|echo|print|db_query|db_execute|json_encode|json_decode|session_destroy|redirect|len|count|int|str|float|isset|not_empty|slugify|str_replace|str_contains|starts_with|ends_with|split|join|trim|lower|upper|now|timestamp|date|date_format|save_upload|file_exists|delete_file|escape_html|hash_password|verify_password|add_action|do_action|add_filter|apply_filters|math_sum|math_mean|math_median|math_variance|math_std|math_dot_product|jprm_bbdd_query|jprm_bbdd_ping|jprm_bbdd_graph_traverse|df_from_bbdd|http_get|sleep_ms|ws_broadcast|ws_clients_count|log_info|log_warn|log_error|log_debug)\\b"
+        },
+        {
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+          "captures": {
+            "1": { "name": "support.function.call.jprm" }
+          }
+        },
+        {
+          "name": "variable.language.self.jprm",
+          "match": "@(Session|Request|Query|Cookie|Server|Files|session|request|query|cookie|server|files)\\b"
+        },
+        {
+          "match": "(->|\\.)([a-zA-Z_][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": { "name": "punctuation.accessor.jprm" },
+            "2": { "name": "variable.other.property.jprm" }
+          }
+        },
+        {
+          "name": "variable.parameter.jprm",
+          "match": "\\$[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        },
+        {
+          "name": "keyword.operator.comparison.jprm",
+          "match": "(==|!=|<=|>=|<|>|=>|:)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.jprm",
+          "match": "(\\+|\\-|\\*|\\/|\\%)"
+        },
+        {
+          "name": "keyword.operator.assignment.jprm",
+          "match": "(=)"
+        },
+        {
+          "name": "variable.other.readwrite.jprm",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}

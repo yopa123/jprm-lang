@@ -1,0 +1,54 @@
+{
+  "Bloque JPRM": {
+    "prefix": "jprm",
+    "body": [
+      "<?jprm $1 ?>"
+    ],
+    "description": "Insertar bloque de código JPRM"
+  },
+  "Interpolación Echo": {
+    "prefix": "echo",
+    "body": [
+      "{{ $1 }}"
+    ],
+    "description": "Imprimir variable {{ expr }}"
+  },
+  "Condicional If": {
+    "prefix": "if",
+    "body": [
+      "<?jprm if ${1:condicion}: ?>",
+      "\t$0",
+      "<?jprm endif; ?>"
+    ],
+    "description": "Estructura if en JPRM"
+  },
+  "Condicional If Else": {
+    "prefix": "ifelse",
+    "body": [
+      "<?jprm if ${1:condicion}: ?>",
+      "\t$2",
+      "<?jprm else: ?>",
+      "\t$0",
+      "<?jprm endif; ?>"
+    ],
+    "description": "Estructura if-else en JPRM"
+  },
+  "Bucle For": {
+    "prefix": "for",
+    "body": [
+      "<?jprm for ${1:item} in ${2:items}: ?>",
+      "\t$0",
+      "<?jprm endfor; ?>"
+    ],
+    "description": "Bucle for en JPRM"
+  },
+  "Función con Anotador": {
+    "prefix": "fn",
+    "body": [
+      "@[Method: ${1:POST}, Enforced: ${2:true}]",
+      "function ${3:nombre_funcion}(body):",
+      "\treturn $0"
+    ],
+    "description": "Función o endpoint con anotadores"
+  }
+}
