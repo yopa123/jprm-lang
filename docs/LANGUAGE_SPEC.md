@@ -1,9 +1,9 @@
-# Especificación del Lenguaje JPRM
+# Especificación del Lenguaje JPRM v2 (CoreWeb Specification)
 
-> **Versión:** 1.0.0-alpha  
+> **Versión del Motor:** 2.0.0  
 > **Extensión de código fuente:** `.jprm`  
 > **Extensión de bytecode binario:** `.jprmc`  
-> **Paradigma:** Orientado a Objetos con Tipado Cerrado Estricto, arquitectura MVC desacoplada, Asincronía Nativa (`async`/`await`/`spawn`) y Ejecución de Alto Rendimiento.
+> **Paradigma:** Orientado a Objetos con Tipado Cerrado Estricto (Estilo Dart / Flutter), MVC desacoplado (Estilo CodeIgniter 4 / Laravel), Asincronía Nativa (`async`/`await`/`spawn`) y Ejecución Compilada/JIT sobre Rust (Tokio + Axum).
 
 ---
 
@@ -33,60 +33,6 @@ JPRM v2 adopta una gramática moderna y pura:
 
 ---
 
-## 1.3. Literales de Objeto y Manipulación JSON
-
-JPRM ofrece soporte de primera clase para estructuras de datos de clave-valor (Objetos y JSON):
-
-### Creación y Acceso
-```jprm
-let usuario = {
-    nombre: "Roberto",
-    "apellido": "Gómez",
-    edad: 42,
-    contacto: {
-        email: "roberto@ejemplo.cl"
-    }
-};
-
-# Acceso por punto o por corchetes (incluso anidado)
-echo usuario.nombre;               # Roberto
-echo usuario["apellido"];          # Gómez
-echo usuario.contacto.email;       # roberto@ejemplo.cl
-```
-
-### Mutación de Propiedades (Directa y Profunda)
-```jprm
-usuario.nombre = "Don Ramón";
-usuario["edad"] = 50;
-usuario.contacto.email = "ramon@vecindad.cl";
-```
-
-### Métodos Nativos de Objetos
-Todo objeto en JPRM expone métodos de inspección y conversión:
-- `obj.len()`: Cantidad de propiedades.
-- `obj.keys()`: Arreglo de nombres de claves.
-- `obj.values()`: Arreglo de valores.
-- `obj.has("clave")`: Comprueba si la clave existe (retorna `bool`).
-- `obj.get("clave", default)`: Retorna el valor o el valor por defecto si no existe.
-- `obj.toJson()`: Serializa el objeto a cadena JSON.
-
-### API Global y Estática JSON
-```jprm
-# Serialización (JavaScript style, Estática o Procedural)
-let json_str = JSON.stringify(usuario);
-let json_str2 = JSON::stringify({ test: 123 });
-let json_str3 = json_encode(usuario);
-
-# Deserialización / Parseo
-let objeto = JSON.parse(json_str);
-let objeto2 = JSON::parse(json_str2);
-let objeto3 = json_decode(json_str3);
-
-echo objeto.nombre; # Don Ramón
-```
-
----
-
 ## 2. Clases, Objetos y ORM con ActiveRecord
 
 JPRM v2 soporta definición de clases nativas con constructores, propiedades tipadas y métodos:
@@ -98,7 +44,7 @@ class Producto {
     float precio
     int stock
 
-    fn calcularIva(float tasa) : float {
+    function calcularIva(float tasa) : float {
         return this.precio * tasa
     }
 }
@@ -131,14 +77,14 @@ producto.delete()
 
 ## 3. Asincronía Nativa (`async`, `await`, `spawn`)
 
-El runtime de JPRM admite ejecución asíncrona real en scripts y controladores:
+El runtime de JPRM está montado sobre Tokio, lo que permite ejecución asíncrona real en scripts y controladores:
 
 ### 3.1. Tareas en Segundo Plano con `spawn { ... }`
-Desacopla tareas pesadas del ciclo de respuesta HTTP. La respuesta al cliente web se envía de inmediato, mientras el bloque `spawn` continúa ejecutándose en segundo plano:
+Desacopla tareas pesadas del ciclo de respuesta HTTP. La respuesta al cliente web se envía de inmediato, mientras el bloque `spawn` continúa ejecutándose en el pool de hilos de Tokio:
 
 ```jprm
 @post("/pedido")
-fn procesarPedido() {
+function procesarPedido() {
     object payload = @Request
     int pedido_id = guardarPedido(payload)
 
@@ -154,7 +100,7 @@ fn procesarPedido() {
 ```
 
 ### 3.2. Primitivas Asíncronas
-- `sleep_ms(int milisegundos)`: Pausa asíncrona no bloqueante que cede el control al planificador sin detener el servidor.
+- `sleep_ms(int milisegundos)`: Pausa asíncrona no bloqueante (utiliza `tokio::time::sleep`).
 - `http_get(string url) : string`: Realiza peticiones HTTP externas asíncronas sin congelar el hilo principal.
 
 ---
@@ -257,3 +203,117 @@ El runtime implementa logging de alta concurrencia con buffers asíncronos y rot
 | `sleep_ms`   | `sleep_ms(int ms)` | Pausa asíncrona no bloqueante sobre Tokio. |
 | `http_get`   | `http_get(string url) : string` | Petición HTTP asíncrona de lectura. |
 | `log_info`   | `log_info(string msg)` | Emisión de log estructurado al sistema de chunks. |
+
+---
+
+## 9. Depuración Interactiva Paso a Paso (Debugger)
+
+JPRM incluye un motor de depuración interactivo nativo (REPL debugger) para rastrear errores y variables en tiempo de ejecución línea a línea:
+
+- **Ejecución**: `jprm debug <archivo.jprm>`
+- **Punto de interrupción programático**: `debugger;` o `breakpoint()`
+- **Comandos en consola `(jprm-dbg)`**:
+  - `n` / `next`: Avanza a la siguiente instrucción sin entrar a funciones.
+  - `s` / `step`: Entra en detalle a la función invocada.
+  - `c` / `continue`: Reanuda la ejecución hasta el siguiente breakpoint o fin del script.
+  - `p <expr>` / `print <expr>`: Evalúa cualquier expresión o variable en el contexto actual.
+  - `vars` / `locals`: Muestra todas las variables locales definidas y sus valores.
+  - `list` / `l`: Imprime las líneas de código fuente circundantes con indicador de línea actual.
+  - `break <línea>` / `b <línea>`: Añade un breakpoint dinámico en una línea.
+  - `delete <línea>` / `d <línea>`: Elimina un breakpoint.
+  - `quit` / `q`: Detiene la sesión de depuración.
+
+---
+
+## 10. Tipo Decimal de Punto Fijo (Fintech & Precisión)
+
+Para evitar errores de redondeo de punto flotante en cálculos contables, divisas e intereses, JPRM implementa el tipo primitivo `decimal` de 128 bits con soporte para redondeo bancario (*Banker's Rounding*):
+
+- **Sintaxis**: Literales con sufijo `m` o `M`: `let saldo = 1250.55m`
+- **Operaciones exactas**: `+`, `-`, `*`, `/` entre decimales, enteros y conversiones seguras.
+- **Métodos nativos**:
+  - `.round(decimales)`: Redondeo bancario IEEE 754 (al número par más cercano).
+  - `.round_away(decimales)`: Redondeo estándar alejándose de cero.
+  - `.to_fixed(decimales)`: Formatea a cadena con cantidad fija de ceros decimales (ej. `"1250.55"`).
+  - `.abs()`, `.floor()`, `.ceil()`, `.trunc()`
+  - `.to_float()`, `.to_int()`
+- **Primitivas Matemáticas y Estadísticas Vectoriales**:
+  - `math_sum(arr)`: Suma acumulativa exacta.
+  - `math_mean(arr)`: Media o promedio aritmético.
+  - `math_median(arr)`: Mediana estadística.
+  - `math_variance(arr)` y `math_std(arr)`: Varianza y desviación estándar poblacional.
+  - `math_dot_product(arr1, arr2)`: Producto punto vectorial.
+
+---
+
+## 11. Abstracción DataFrame en Memoria RAM (Ciencia de Datos)
+
+Permite procesar colecciones tabulares de alto volumen en memoria de forma desacoplada y multi-fuente:
+
+- **Constructores Multi-Fuente**:
+  - `DataFrame.from_csv(ruta_o_texto)`
+  - `DataFrame.from_json(ruta_o_texto)`
+  - `DataFrame.from_array(arreglo_de_objetos)`
+  - `DataFrame.from_bbdd(url_bbdd, sql, [token])`
+- **Métodos de Transformación**:
+  - `.head(n)` / `.tail(n)`: Inspección de primeras/últimas filas.
+  - `.shape()`: Tupla con cantidad de filas y columnas `[filas, columnas]`.
+  - `.columns()`: Lista de nombres de columnas.
+  - `.select(["colA", "colB"])`: Proyección columnar.
+  - `.filter("col", ">=", valor)`: Filtrado lógico vectorizado.
+  - `.sort_by("col", true|false)`: Ordenamiento ascendente o descendente.
+  - `.describe()`: Resumen estadístico (count, mean, min, max, etc.).
+  - `.to_csv()` / `.to_json()`: Exportación directa.
+
+---
+
+## 12. Microservicios y APIs Rápidas (Estilo FastAPI)
+
+Además de la arquitectura MVC completa, JPRM permite crear microservicios ultraligeros de archivo único con la clase `App`:
+
+- **Scaffold**: `jprm new mi_servicio --api` (o `--minimal`)
+- **Estructura**:
+  ```jprm
+  let app = new App(8080)
+
+  @app.get("/api/usuarios")
+  function listar_usuarios() {
+      return [
+          { id: 1, nombre: "Ana", saldo: 250000m },
+          { id: 2, nombre: "Bernardo", saldo: 120000m }
+      ]
+  }
+
+  @app.post("/api/cotizar")
+  function cotizar(datos) {
+      let monto = datos.monto
+      let total = monto * 1.19m
+      return { estado: "ok", total: total.round(2) }
+  }
+
+  # Registro programático opcional
+  app.get("/health", function() { return { status: "UP" } })
+
+  app.listen(8080)
+  ```
+
+---
+
+## 13. Conector Nativo Multi-Motor jprm-BBDD
+
+Integración directa con el motor `jprm-BBDD` que combina Tabular (Apache Arrow/Parquet), Grafos topológicos (redb B-Tree) y Vectores/Documentos:
+
+- **Instanciación**:
+  ```jprm
+  let db = new JprmBBDD("http://127.0.0.1:8123", "token_opcional")
+  ```
+- **Operaciones**:
+  - `db.ping() : bool`: Verifica conectividad con `/ping`.
+  - `db.query(sql) : array`: Ejecuta consultas SQL sobre ClickHouse wire format con respuesta en JSON.
+  - `db.traverse_graph(origin_id, relation_code, direction, join_table) : array`: Ejecuta recorridos de grafo usando el operador nativo `GRAPH_PATH` y los cruza en memoria con tablas relacionales.
+  - `db.to_dataframe(sql) : DataFrame`: Ingesta directa de una consulta al motor como un DataFrame en memoria RAM.
+- **Funciones Globales**:
+  - `jprm_bbdd_query(url, sql, [token])`
+  - `jprm_bbdd_ping(url, [token])`
+  - `jprm_bbdd_graph_traverse(url, origin_id, relation_code, [direction], [join_table], [token])`
+  - `df_from_bbdd(url, sql, [token])`
